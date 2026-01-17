@@ -1,0 +1,75 @@
+menu "Example Configuration"
+
+    orsource "$IDF_PATH/examples/common_components/env_caps/$IDF_TARGET/Kconfig.env_caps"
+
+    menu "Ethernet Configuration"
+
+        config ETH_PHY_ADDR
+            int "EMAC PHY Address"
+            default 1
+            range 0 31
+            help
+                EMAC PHY address (0-31). Typically 1 for most boards.
+
+        config ETH_PHY_RST_GPIO
+            int "EMAC PHY Reset GPIO"
+            default -1
+            range -1 ENV_GPIO_OUT_RANGE_MAX
+            help
+                GPIO number to reset PHY. -1 if not used.
+
+    endmenu
+
+    menu "Camera Configuration"
+
+        config EXAMPLE_ENABLE_MIPI_CSI_CAM_SENSOR
+            bool "Enable MIPI-CSI Camera"
+            default y
+            help
+                Enable MIPI-CSI camera sensor support (OV5647, SC2336, etc.)
+
+        config EXAMPLE_MIPI_CSI_SCCB_I2C_PORT
+            int "MIPI-CSI SCCB I2C Port"
+            range 0 1
+            default 0
+            help
+                I2C port number for camera sensor SCCB communication
+
+        config EXAMPLE_MIPI_CSI_SCCB_I2C_SCL_PIN
+            int "MIPI-CSI SCCB I2C SCL Pin"
+            range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+            default 8
+            help
+                GPIO number for I2C SCL (clock) line
+
+        config EXAMPLE_MIPI_CSI_SCCB_I2C_SDA_PIN
+            int "MIPI-CSI SCCB I2C SDA Pin"
+            range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+            default 7
+            help
+                GPIO number for I2C SDA (data) line
+
+        config EXAMPLE_MIPI_CSI_SCCB_I2C_FREQ
+            int "MIPI-CSI SCCB I2C Frequency (Hz)"
+            range 10000 400000
+            default 100000
+            help
+                I2C frequency in Hz for camera sensor communication
+
+        config EXAMPLE_MIPI_CSI_CAM_SENSOR_RESET_PIN
+            int "Camera Sensor Reset Pin"
+            range -1 ENV_GPIO_OUT_RANGE_MAX
+            default -1
+            help
+                GPIO number for camera sensor reset pin (-1 if not used)
+
+        config EXAMPLE_MIPI_CSI_CAM_SENSOR_PWDN_PIN
+            int "Camera Sensor Power Down Pin"
+            range -1 ENV_GPIO_OUT_RANGE_MAX
+            default -1
+            help
+                GPIO number for camera sensor power down pin (-1 if not used)
+
+    endmenu
+
+endmenu
